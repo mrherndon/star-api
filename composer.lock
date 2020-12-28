@@ -1,0 +1,49 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "3a926a05919b08b04f60e722bd9d4294",
+    "packages": [
+        {
+            "name": "techdeck/password-hash",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mrherndon/passwordHash.git",
+                "reference": "42aabc8d9d78fdb738b7ab1610b2030330d1d6cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mrherndon/passwordHash/zipball/42aabc8d9d78fdb738b7ab1610b2030330d1d6cc",
+                "reference": "42aabc8d9d78fdb738b7ab1610b2030330d1d6cc",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "techdeck\\passwordHash\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Raymond Herndon",
+                    "email": "rherndon@starsacramento.org"
+                }
+            ],
+            "description": "password hashing algorithm",
+            "time": "2020-12-22T19:43:58+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}

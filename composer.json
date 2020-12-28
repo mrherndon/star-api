@@ -1,0 +1,14 @@
+{
+    "name": "misterray/star-api",
+    "description": "api for serving star data adapters",
+    "type": "library",
+    "require": {
+        "techdeck/password-hash": "^1.0"
+    },
+    "authors": [
+        {
+            "name": "Raymond Herndon",
+            "email": "rherndon@starsacramento.org"
+        }
+    ]
+}
