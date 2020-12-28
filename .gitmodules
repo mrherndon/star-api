@@ -1,0 +1,3 @@
+[submodule "adapters"]
+	path = adapters
+	url = https://github.com/mrherndon/adapters.git
