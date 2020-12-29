@@ -9,7 +9,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // constants
-define('ROOT',dirname(dirname(__FILE__)));
+define('ROOT',dirname(__FILE__));
 define('HOSTINFO','mysql:dbname=starneto_starNetOnline;host=localhost;charset=utf8');
 define('SUPPORTHOST','mysql:dbname=starneto_support;host=localhost');
 define('PASSWORD','Cartm@n123');
@@ -38,6 +38,14 @@ list($subdomain, $host, $tdl) = explode('.', $_SERVER['HTTP_HOST']);
 session_name("main");
 session_set_cookie_params(0, '/', '.'.$host.'.'.$tdl, false, false);
 session_start();
+
+if (isset($_SERVER['HTTP_ORIGIN'])) {
+	// Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
+	// you want to allow, and if so:
+	header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+	header('Access-Control-Allow-Credentials: true');
+	header('Access-Control-Max-Age: 86400');    // cache for 1 day
+}
 
 if(isset($_POST['logout'])) {
     unset($_SESSION['user']);
@@ -139,6 +147,7 @@ if(isset($_SESSION['user'])){
 		"primary" => $primary,
 		"students" => $students
 	]);
+	exit;
 }
 
 echo json_encode([
