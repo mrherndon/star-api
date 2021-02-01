@@ -35,9 +35,12 @@ spl_autoload_register(function ($class) {
 // set up session stuff, so that we can manage logged in state
 list($subdomain, $host, $tdl) = explode('.', $_SERVER['HTTP_HOST']);
 
-session_name("main");
+session_name("starsacramento");
 session_set_cookie_params(0, '/', '.'.$host.'.'.$tdl, false, false);
+// session_set_cookie_params(['SameSite' => 'None', 'Secure' => true]);
 session_start();
+
+$sessionVals = $_SESSION;
 
 if (isset($_SERVER['HTTP_ORIGIN'])) {
 	// Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
@@ -87,13 +90,13 @@ if(isset($_POST['login'])) {
 				$_SESSION['id'] = $localUser->id;
 			
 			} else {
-				$failed = 'pw';
+				$failed = 'This email address and/or password is incorect. Please try again or contact tech support for help.';
 			}
 		} else {
-			$failed = 'verify';
+			$failed = 'You account email address was never verified, please contact tech support for help.';
 		}
     } else {
-        $failed = 'un';
+        $failed = 'This email address and/or password is incorect. Please try again or contact tech support for help.';
     }
 
     unset($localUser);
@@ -136,22 +139,28 @@ if(isset($_SESSION['user'])){
 	// again, not sure about this, but costs so little to include
     $contexts = $_SESSION['contexts'];
 	$currentContext = (isset($_SESSION['currentContext']) ? $_SESSION['currentContext'] : $contexts[0]);
+}
 
+// here is where we might set up some routing for enrollment situations.... maybe
+// this is backwards of how we used to do this, but for an api, this could make sense
+if(isset($_POST['init'])) include ROOT.'/requests/initialLoad.php';
+
+// if we got here, this is an initial page load, or a null request of some kind.
+// in either case, return back current session state information
+if(isset($user) && $user->id){
 	echo json_encode([
 		"error" => false,
-		"user" => $user,
+		"user" => $user->sanitized(),
 		"roles" => $roles,
 		"contexts" => $contexts,
 		"currentContext" => $currentContext,
 		"admin" => $admin,
 		"primary" => $primary,
-		"students" => $students
+		"students" => $students,
 	]);
-	exit;
+} else {
+	echo json_encode([
+		"error" => true,
+		"reason" => $failed,
+	]);
 }
-
-echo json_encode([
-	"error" => true,
-	"reason" => $failed,
-	"post vals" => $_POST
-]);
