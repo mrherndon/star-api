@@ -6,6 +6,6 @@ $regWindow = registrationWindowData::getById(1);
 
 var_dump($regWindow);
 
-$badRegwindow = registrationWindowData::getById(0);
+$badRegWindow = registrationWindowData::getById(0);
 
-var_dump($badRegwindow);
+var_dump($badRegWindow);

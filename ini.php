@@ -22,7 +22,7 @@ foreach (glob(ROOT."/adapters/constants/*.php") as $filename) {
 // not sure how I want to handle this one yet
 define('PROMOTIONDAY', '2019-06-03');
 
-// environn setup
+// environ setup
 setlocale(LC_MONETARY, 'en_US');
 
 //  auto load data adapters
@@ -46,6 +46,8 @@ if (isset($_SERVER['HTTP_ORIGIN'])) {
 	// Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
 	// you want to allow, and if so:
 	header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+	header('Access-Control-Allow-Methods: POST');
+    header('Access-Control-Allow-Headers: Content-Type');
 	header('Access-Control-Allow-Credentials: true');
 	header('Access-Control-Max-Age: 86400');    // cache for 1 day
 }
@@ -90,13 +92,13 @@ if(isset($_POST['login'])) {
 				$_SESSION['id'] = $localUser->id;
 			
 			} else {
-				$failed = 'This email address and/or password is incorect. Please try again or contact tech support for help.';
+				$failed = 'This email address and/or password is incorrect. Please try again or contact tech support for help.';
 			}
 		} else {
 			$failed = 'You account email address was never verified, please contact tech support for help.';
 		}
     } else {
-        $failed = 'This email address and/or password is incorect. Please try again or contact tech support for help.';
+        $failed = 'This email address and/or password is incorrect. Please try again or contact tech support for help.';
     }
 
     unset($localUser);
@@ -145,22 +147,24 @@ if(isset($_SESSION['user'])){
 // this is backwards of how we used to do this, but for an api, this could make sense
 if(isset($_POST['init'])) include ROOT.'/requests/initialLoad.php';
 
-// if we got here, this is an initial page load, or a null request of some kind.
-// in either case, return back current session state information
-if(isset($user) && $user->id){
-	echo json_encode([
-		"error" => false,
-		"user" => $user->sanitized(),
-		"roles" => $roles,
-		"contexts" => $contexts,
-		"currentContext" => $currentContext,
-		"admin" => $admin,
-		"primary" => $primary,
-		"students" => $students,
-	]);
-} else {
-	echo json_encode([
-		"error" => true,
-		"reason" => $failed,
-	]);
+if(!isset($_POST['action'])) {
+	// if we got here, this is an initial page load, or a null request of some kind.
+	// in either case, return back current session state information
+	if(isset($user) && $user->id){
+		echo json_encode([
+			"error" => false,
+			"user" => $user->sanitized(),
+			"roles" => $roles,
+			"contexts" => $contexts,
+			"currentContext" => $currentContext,
+			"admin" => $admin,
+			"primary" => $primary,
+			"students" => $students,
+		]);
+	} else {
+		echo json_encode([
+			"error" => true,
+			"reason" => $failed,
+		]);
+	}
 }
