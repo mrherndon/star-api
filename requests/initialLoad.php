@@ -1,12 +1,13 @@
 <?php
-
+$testing = $_POST['testing'] ?? false;
 echo json_encode([
     "schools" => schoolData::getRows(),
     "grades" => gradesData::getRows(),
-    "enrollingSchools" => schoolData::getCurrentlyEnrollingSchools($_POST['testing'] ?? false),
-    "programListings" => programListingData::getCurrentlyEnrollingPrograms($_POST['testing'] ?? false),
-    "schedules" => scheduleData::getCurrentlyEnrollingSchedules($_POST['testing'] ?? false),
-    "extendedSchedules" => extendedScheduleData::getCurrentlyEnrollingExtendedSchedules($_POST['testing'] ?? false),
+    "enrollingSchools" => schoolData::getCurrentlyEnrollingSchools($testing),
+    "programListings" => programListingData::getCurrentlyEnrollingPrograms($testing),
+    "registrationWindows" => registrationWindowData::getCurrentlyEnrolling($testing),
+    "schedules" => scheduleData::getCurrentlyEnrollingSchedules($testing),
+    "extendedSchedules" => extendedScheduleData::getCurrentlyEnrollingExtendedSchedules($testing),
     "programTypes" => programTypesData::getRows(),
     "gradeGroups" => gradesData::getRowsGrouped(),
 ]);
