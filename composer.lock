@@ -42,16 +42,16 @@
         },
         {
             "name": "techdeck/post",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mrherndon/post.git",
-                "reference": "116284a809346e759b1c464c51479f737edbb9b4"
+                "reference": "bea6e812920e0568e5c48ff6543c71680d81608c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mrherndon/post/zipball/116284a809346e759b1c464c51479f737edbb9b4",
-                "reference": "116284a809346e759b1c464c51479f737edbb9b4",
+                "url": "https://api.github.com/repos/mrherndon/post/zipball/bea6e812920e0568e5c48ff6543c71680d81608c",
+                "reference": "bea6e812920e0568e5c48ff6543c71680d81608c",
                 "shasum": ""
             },
             "type": "library",
@@ -70,9 +70,9 @@
             "description": "post actions",
             "support": {
                 "issues": "https://github.com/mrherndon/post/issues",
-                "source": "https://github.com/mrherndon/post/tree/1.0.1"
+                "source": "https://github.com/mrherndon/post/tree/1.0.3"
             },
-            "time": "2020-11-30T19:56:51+00:00"
+            "time": "2021-05-11T19:04:36+00:00"
         }
     ],
     "packages-dev": [],
